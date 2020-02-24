@@ -1,65 +1,32 @@
 import 'package:flutter/material.dart';
+import './chat_list_tile.dart';
+import './chat_room.dart';
+import '../home/home.dart';
 
-class ChatListTile extends StatelessWidget {
-  final Widget avatarChild;
-  final String title;
-  final String subtitle;
-  final String trailingText;
-  final VoidCallback _onTap;
-  final double avatarRadius;
-
-  ChatListTile(this.avatarChild, this.title, this.subtitle, this.trailingText,
-      this._onTap,
-      {this.avatarRadius = 20.0});
+class ChatList extends StatelessWidget {
+  _onTileTap(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) {
+        return ChatRoom();
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _onTap,
-      child: Container(
-        padding: EdgeInsets.all(10.0),
-        child: Row(
-          children: <Widget>[
-            CircleAvatar(
-              radius: avatarRadius,
-              child: avatarChild,
-            ),
-            SizedBox(
-              width: 10.0,
-            ),
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          title,
-                          style: Theme.of(context).textTheme.subhead,
-                        ),
-                      ),
-                      Text(
-                        trailingText,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      subtitle,
-                      style: TextStyle(
-                        color: Theme.of(context).textTheme.caption.color,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+    return ListView.builder(
+      itemCount: 30,
+      itemBuilder: (BuildContext context, int index) {
+        return ChatListTile(
+          Icon(Icons.person),
+          'Contact $index',
+          'hi there',
+          '2:53 in the afternoon',
+              () => _onTileTap(context),
+          avatarRadius: listLeadingAvatarRadius,
+        );
+      },
     );
-    ;
   }
 }
