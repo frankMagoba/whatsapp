@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 
 PreferredSizeWidget buildChatRoomAppBar(Widget avatar, String title) {
